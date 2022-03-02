@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First One</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <svg width="500" height="500">
+        <rect x="0" y="0" width="300" height="200" fill="yellow"></rect>
+    </svg>
+    <p> first paragraph turns green immediately </p>
+    <p id = "p2"> second paragraph turns red immediately</p>
+    <p> third paragraph turns blue with all contents in other 'p' tags after 3 seconds </p>
+    
+    <style>
+        .myclass{
+            color:"red"
+        }
+    </style>
+    <p class = "myclass"> fourth paragraph turns grey after 4 seconds </p>
+
+    <b>Selecting Nested Elements</b>
+    <table>
+        <tr>
+            <td>
+                One
+            </td>
+            <td>
+                Two
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Three
+            </td>
+            <td>
+                Four
+            </td>
+        </tr>
+        </table>
+        
+        
+</body>
+
+<script>
+    d3.select("p").style("color", "green"); // selects the first element by name
+    d3.select("#p2").style("color", "red") // selects an element by ID
+
+    setTimeout(()=> {
+        d3.selectAll("p").style("color", "blue") // selects all p elements
+    }, 3000) // introduced delay to let us see, D3 DOM selectors at work
+
+
+    // after the 3 seconds
+    setTimeout(()=>{
+
+        d3.selectAll(".myclass").style("color", "grey")
+    }, 4000)
+
+
+    // selecting nested elements
+ 
+            d3.select("tr").selectAll("td").style('background-color','yellow');
+    
+</script>
+</html>

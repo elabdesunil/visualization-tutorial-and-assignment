@@ -1,0 +1,109 @@
+<!--taken from : https://vega.github.io/vega-lite/tutorials/explore.html-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vega-Lite: Exploring Data</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+
+    <style media="screen">
+      /* Add space between Vega-Embed links  */
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Template for Embedding Vega-Lite Visualization</h1>
+    <!-- Container for the visualization -->
+    <h2>Data transformation - variability of tempreatures changes thorughout the year</h2>
+    <div id="vis"></div>
+
+    <h2>Weather Data</h2>
+    <div id="vis2"></div>
+
+    <h2>Weather Data - Properly Colored </h2>
+    <div id="vis3"></div>
+
+    <script>
+      // Assign the specification to a local variable vlSpec.
+      var vlSpec = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        
+        "data": {"url": "https://vega.github.io/vega-lite/data/seattle-weather.csv"},
+        "transform":[
+            {"calculate": "datum.temp_max - datum.temp_min", "as": "temp_range"}
+        ],
+        "mark": "line",
+        "encoding": {
+            "x": {"timeUnit": "month", "field": "date"},
+            "y": {"aggregate": "mean", "field": "temp_range"}
+        }
+
+  };
+
+  var vlSpec2 = {
+      $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+
+      "data": {"url": "https://vega.github.io/vega-lite/data/seattle-weather.csv"},
+      "mark": "bar",
+      "encoding":{
+          "x": {
+              "timeUnit": "month",
+              "field": "date",
+              "type": "ordinal"
+          },
+          "y":{
+              "aggregate": "count",
+              "type": "quantitative"
+          },
+          "color": {
+              "field": "weather",
+              "type": "nominal"
+          }
+      }
+
+  }
+
+  var vlSpec3 = 
+    {
+  "data": {"url": "https://vega.github.io/vega-lite/data/seattle-weather.csv"},
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "timeUnit": "month",
+      "field": "date",
+      "type": "ordinal",
+      "title": "Month of the year"
+    },
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "weather",
+      "type": "nominal",
+      "scale": {
+        "domain": ["sun", "fog", "drizzle", "rain", "snow"],
+        "range": ["#e7ba52", "#c7c7c7", "#aec7e8", "#1f77b4", "#9467bd"]
+      },
+      "title": "Weather type"
+    }
+  }
+
+  }
+
+      // Embed the visualization in the container with id `vis`
+      vegaEmbed('#vis', vlSpec);
+
+      vegaEmbed("#vis2", vlSpec2);
+
+      vegaEmbed("#vis3", vlSpec3);
+    </script>
+  </body>
+</html>

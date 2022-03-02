@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First One</title>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+
+    <div>
+        <p>replace this</p>
+    </div>
+  
+    <button onclick="tryRemove()">
+    Try Remove()
+    </button>
+
+    <button onclick="setInnerHtml()">
+    html()
+    </button>
+
+    <button onclick="setAttr()">
+    Set Attr Class = error
+    </button>
+
+    <button onclick="addProperty()">
+    add checked property
+    </button>
+
+
+    <p>D3 <input type="checkbox"></p>
+    <p>jQuery<input type="checkbox"></p>
+</body>
+
+<script>
+    // text() to add or modify text content of selected elements
+    d3.select("p").text("this is the replacement text")
+
+    // append() to create a new DOM element and add it at the end of the seleected DOM element
+    d3.select("body").append("p").text("appending a paragraph")
+
+    // insert() seems to do the same thing as append()
+    d3.select("div").insert("p").text(" second paragraph")
+
+    function tryRemove(){
+        d3.select("p").remove();
+    }
+
+
+    // html() to set inner html of selected elements
+    function setInnerHtml(){
+        d3.select("p").html("<span>This is new inner HTML. </span>")
+    }
+
+    // attr() to apply attributes on the selected DOM elements
+    function setAttr(){
+        d3.select("p").attr("class", "error")
+    }
+
+    // property() to set checked property for checkbox or radio
+    function addProperty(){
+        d3.select("input").property("checked", true);
+    }
+
+    // style() to apply style attribute with specied name and value to the selected elements
+    // already done
+    // looks like: d3.select("p").style("color", "red")
+
+    // classed() to set class attribute or modify classList property to the selected elements
+    
+
+</script>
+</html>
