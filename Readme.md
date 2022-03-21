@@ -4,6 +4,8 @@ For d3, I'm using tutorial from https://www.tutorialsteacher.com/d3js/web-standa
 
 Links for the others are provided in the respective files.
 
+project is now live at: https://sunilale0.github.io/visualization-tutorial-and-assignment/
+
 In `vega-assignment2.html`, some questions I could try to answer include the following:
 
 - see how the number of cylinders affect the price of the car
