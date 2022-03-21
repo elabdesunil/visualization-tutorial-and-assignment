@@ -17,24 +17,80 @@
     </style>
   </head>
   <body>
-    <h1>Template for Embedding Vega-Lite Visualization</h1>
+    <h1>Car Data Visualized</h1>
     <!-- Container for the visualization -->
     <div id="vis"></div>
+
+    <div id="vis2"></div>
+    <div id="vis3"></div>
 
     <script>
       // Assign the specification to a local variable vlSpec.
       var vlSpec = {
         $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-        "data": {"url": "C:/Users/Sunil/Downloads/imports-85.data"},
-        mark: 'bar',
-        encoding: {
-            "x": {"field": 2, "type": "quantitative"}
-          }
+        "data": {"url": "https://raw.githubusercontent.com/sunilale0/visualization-tutorial-and-assignment/master/cars_data.csv"},
+        
+        "transform":[
+            {"type":"aggregate", "groupby": ["make"]}
+        ],
+        
+        "mark": 'point',
+        
+        "encoding": {
+            "x": {"field": "make", "type": "quantitative"},
+            "y": {"field": "height", "type": "quantitative"},
+          },
         
       };
 
+      var vlSpecWeath = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        "data": {"url": "https://raw.githubusercontent.com/sunilale0/visualization-tutorial-and-assignment/master/seattle-weather.csv"},
+        "mark": "line",
+        "transform":[
+            {"calculate": "datum.temp_max - datum.temp_min", "as": "temp_range"}
+        ],
+        "mark": "line",
+        "encoding": {
+            "x": {"timeUnit": "month", "field": "date"},
+            "y": {"aggregate": "mean", "field": "temp_range"}
+        }
+
+      }
+
+      var vlSpec3 = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        "data": {"url": "https://raw.githubusercontent.com/sunilale0/visualization-tutorial-and-assignment/master/cars_data.csv"},
+        
+        "mark":"bar",
+
+        "transform": [{
+          "aggregate": [{
+            "op": "mean",
+            "field": "height",
+            "as":"mean_height"
+          }],
+          "groupby":["make"]
+        }],
+        
+        "encoding": {
+            "x": {"field": "make", "type": "ordinal"},
+            "y": { "field": "mean_height", "type": "quantitative"}
+            // "color": {
+            //     "field": "make",
+            //     "type": "nominal",
+            //     "scale": {
+            //       "domain": ["alfa-romero", "audi", "bmw", "chevrolet", "dodge"],
+            //       "range": ["#e7ba52", "#c7c7c7", "#aec7e8", "#1f77b4", "#9467bd"]
+            //       },
+            //       },
+                }
+              }
+      
       // Embed the visualization in the container with id `vis`
       vegaEmbed('#vis', vlSpec);
+      vegaEmbed('#vis2', vlSpecWeath);
+      vegaEmbed("#vis3", vlSpec3);
     </script>
   </body>
 </html>
