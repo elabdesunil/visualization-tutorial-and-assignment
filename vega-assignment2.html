@@ -70,22 +70,25 @@
             "field": "height",
             "as":"mean_height"
           }],
+          "aggregate": [{
+            "op": "mean",
+            "field": "width",
+            "as":"mean_width"
+          }],
+          "aggregate": [{
+            "op": "mean",
+            "field": "length",
+            "as":"mean_length"
+          }],
           "groupby":["make"]
         }],
         
         "encoding": {
             "x": {"field": "make", "type": "ordinal"},
-            "y": { "field": "mean_height", "type": "quantitative"}
-            // "color": {
-            //     "field": "make",
-            //     "type": "nominal",
-            //     "scale": {
-            //       "domain": ["alfa-romero", "audi", "bmw", "chevrolet", "dodge"],
-            //       "range": ["#e7ba52", "#c7c7c7", "#aec7e8", "#1f77b4", "#9467bd"]
-            //       },
-            //       },
+            "y": { "field": "mean_length", "type": "quantitative"}
+    
                 }
-              }
+      }
       
       // Embed the visualization in the container with id `vis`
       vegaEmbed('#vis', vlSpec);
